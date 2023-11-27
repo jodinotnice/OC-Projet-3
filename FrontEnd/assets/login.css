@@ -10,7 +10,7 @@ del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
+fieldset, form, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
@@ -32,7 +32,6 @@ footer, header, hgroup, menu, nav, section {
 html{
 	background-color: #fffef8;
 }
-
 body {
 	line-height: 1;
 }
@@ -128,6 +127,10 @@ nav li {
 	font-size: 1.2em;
 }
 
+.log-in{
+	font-weight: 600;
+}
+
 li:hover {
 	color: #B1663C;
 }
@@ -170,34 +173,35 @@ li:hover {
 	width: 100%;
 
 }
-#contact {
-	width: 50%;
+#login {
+	width: 35%;
 margin: auto;
 }
-#contact > * {
+#login > * {
 	text-align: center;
 
 }
-#contact h2{
+#login h2{
 	margin-bottom: 20px;
 }
-#contact form {
+#login form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#login input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+#login label {
 	margin: 2em 0 1em 0;
+	font-weight: bold;
 }
-#contact textarea {
+#login textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -213,9 +217,36 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 
+.mdp-oublie{
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	color: black;
+	font-weight:600;
+}
+
+.error-message{
+	color:red;
+	font-weight: bold;
+	text-align: center;
+	margin-top: 20px;
+}
+
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
+	align-items: center;
 	margin: 2em
+}
+
+.relative{
+	position: relative;
+	height: 400px;
+}
+
+.absolute{
+	position: absolute;
+	bottom: 0;
+	font-size: 14px;
 }
 

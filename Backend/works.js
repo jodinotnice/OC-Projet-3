@@ -1,6 +1,5 @@
-/*import { getCategories } from "./categories.js";*/
-/*
 let works = [];
+
 
 async function fetchData() {
   const worksUrl = 'http://localhost:5678/api/works';
@@ -13,8 +12,7 @@ async function fetchData() {
     }
 
     works = await response.json();
-      
-      
+    console.log(works);
     createWorks(works);
 
   } catch (error) {
@@ -23,7 +21,10 @@ async function fetchData() {
 }
 
 
-document.addEventListener('DOMContentLoaded', fetchData);
+document.addEventListener('DOMContentLoaded', async () => {
+  await fetchData();
+  getCategories();
+});
 
 async function getCategories() {
   const categoriesUrl = 'http://localhost:5678/api/categories';
@@ -44,26 +45,20 @@ async function getCategories() {
 }
 
 
-getCategories();
-createWorks();
 
 function createCategories(categories) {
   const categoriesGallery = document.createElement("div");
-  
-  const buttonTous = categories;
-  console.log(buttonTous)
+  categoriesGallery.classList.add("container");
 
   const buttonCategoriesTous = document.createElement("button");
   buttonCategoriesTous.classList.add("filter-button");
 
   buttonCategoriesTous.innerText = "Tous";
-  buttonCategoriesTous.setAttribute("data-category-id", buttonTous.id);
+  buttonCategoriesTous.setAttribute("data-category-id", 0);
   categoriesGallery.appendChild(buttonCategoriesTous);
+
   for (let i = 0; i < categories.length; i++) {
-
     const buttonCat = categories[i];
-
-    console.log(buttonCat);
 
     const buttonCategories = document.createElement("button");
     buttonCategories.classList.add("filter-button");
@@ -72,76 +67,63 @@ function createCategories(categories) {
     buttonCategories.setAttribute("data-category-id", buttonCat.id);
     categoriesGallery.appendChild(buttonCategories);
   };
+  console.log('Boutons créés:', categories); 
 
   const divDuneDiv = document.createElement("div");
 
   const gallery = document.querySelector('.gallery');
-
   const parentGallery = gallery.parentElement;
   
   divDuneDiv.appendChild(categoriesGallery);
-
   parentGallery.insertBefore(divDuneDiv, gallery)
   
   const boutonsFiltre = document.querySelectorAll('.filter-button');
 
+  console.log('boutonsFiltre:', boutonsFiltre)
+
   boutonsFiltre.forEach((bouton) => {
+    console.log('Bouton trouvé:', bouton);
     bouton.addEventListener('click', () => {
-      const categorieIdFiltre = parseInt(bouton.getAttribute('data-attribute-id'), 10);
+      const categorieIdFiltre = parseInt(bouton.getAttribute('data-category-id'), 10);
+      console.log('categorieIdFiltre:', categorieIdFiltre);
       filtrerParCategorie(categorieIdFiltre);
     });
+    console.log('bouton', bouton)
   });
-}
 
-
-
-function createWorks(works) {
-  const gallery = document.querySelector('.gallery');
-  gallery.innerHTML = '';
   
-  fetch("http://localhost:5678/api/works")
-  .then((response) => response.json())
-  .then((works) => {
-    for (let i = 0; i < works.length; i++) {
-
-      const travaux = works[i]; 
-    works.forEach((work) => {
-      const travaux = work;
-    
-      console.log(travaux);
-      const gallery = document.querySelector('.gallery');
-  
-      const figureGallery = document.createElement("figure");
-  
-      const imgGallery = document.createElement("img");
-      imgGallery.src = travaux.imageUrl;
-  
-      const figCaptionGallery = document.createElement("ficaption");
-      figCaptionGallery.innerText = travaux.title;
-  
-      gallery.appendChild(figureGallery);
-  
-      figureGallery.appendChild(imgGallery);
-      figureGallery.appendChild(figCaptionGallery);
-    };
-  });
-  
-}
-
-
+}    
 
 function filtrerParCategorie(categorieId) {
-  const worksFiltres = [];
-  for (let i = 0; i < works.length; i ++) {
-    if (works[i].categorieId.includes(categorieId)) {
-      worksFiltres.push(works[i]);
-    }
-  }
+  console.log('Filtrer par catégorie appelé avec ID:', categorieId);
+  const travauxFiltres = works.filter((travail) => {
+    console.log('travail:', travail);
+    console.log('travail.categorieId:', travail.categorieId);
+    return categorieId === 0 || travail.categoryId === categorieId;
+  });
+  console.log('travauxFiltres',travauxFiltres);
+  createWorks(travauxFiltres);
 
-  
-  createWorks(worksFiltres);
-  
 }
 
 
-*/
+function createWorks(filteredWorks) {
+  const gallery = document.querySelector('.gallery');
+  gallery.innerHTML = '';
+
+    (filteredWorks || works).forEach((travail) => {
+      const figureGallery = document.createElement("figure");
+      const imgGallery = document.createElement("img");
+      
+      imgGallery.src = travail.imageUrl;
+      const figCaptionGallery = document.createElement("figcaption");
+      figCaptionGallery.innerText = travail.title;
+  
+      gallery.appendChild(figureGallery);
+      figureGallery.appendChild(imgGallery);
+      figureGallery.appendChild(figCaptionGallery);
+    });
+  }
+
+  const token = localStorage.getItem('token');
+  console.log('Token actuel:', token);

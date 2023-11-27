@@ -9,18 +9,29 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script type="module" src="/Portfolio-architecte-sophie-bluel/Backend/works.js" defer></script>
-	
-	<script type="module" src="/Portfolio-architecte-sophie-bluel/Backend/works2.js" defer></script>
+	<link rel="stylesheet" href="./assets/modal.css">
+	<script type="module" src="../Backend/works.js" defer></script>
+	<script defer src="modal.js">
+	</script>
+	<script src="https://kit.fontawesome.com/45e38e596f.js" crossorigin="anonymous"></script>
 </head>
 <body>
+	
+	<p class="modal-edition">
+		<button onclick="openModal()">
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+			</svg>
+			Mode édition
+		</button>
+		</p>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li>login</li>
+			<li id="loginButton" onclick="toggleLogin()">Login</li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -38,7 +49,39 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+			<div class="flex-align">
+				<h2 class="align-h2">Mes Projets</h2>
+				<button onclick="openModal()">
+					<p class="align-p" >
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+					</svg>
+					Modifier</p>
+				</button>
+			</div>
+
+			<div class="overlay"></div>
+			<div class="modal">
+				<div class="modal-close">
+					<button onclick="closeModal()">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+						</svg>
+					</button>
+				</div>
+				<div class="modal-header">
+					<h2 class="modal-title">
+						Galerie Photo
+					</h2>
+					<div class="modal-body">
+
+					</div>
+
+					<div class="modal-footer">
+						<button class="modal-footer-button">Ajouter une photo</button>
+					</div>
+				</div>
+			</div>
 		<div class="gallery">
 			
 		</div>
