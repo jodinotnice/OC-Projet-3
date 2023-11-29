@@ -13,3 +13,6 @@ document.querySelector('.overlay').addEventListener('click', function (event) {
     closeModal();
   }
 });
+
+const token = localStorage.getItem('token');
+

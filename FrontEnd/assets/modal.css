@@ -1,4 +1,4 @@
-.modal-edition{
+.mode-edition{
  text-align: center;
   padding-top: 15px;
   padding-bottom: 15px;
@@ -7,15 +7,16 @@
   margin-top: -15px;
   background-color: black;
   color:  white;
+  display: none;
 }
 
-.modal-edition svg {
+.mode-edition svg {
   width: 20px;
   height: 16px;
   margin-bottom: -3px;
 }
 
-.modal-edition button {
+.mode-edition button {
   margin-top: 10px;
   background-color: transparent;
   color: white;
@@ -33,6 +34,7 @@
   color: black;
   border: none;
   margin-bottom: 2%;
+  display: none;
 }
 
 .align-p {
@@ -64,9 +66,33 @@
   height: 60%;
   background-color: white;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  border-radius: 3px;
-  padding: 20px;
+  border-radius: 10px;
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-top: 40px;
   display: none;
+}
+
+.divSup {
+  width: 100%;
+}
+
+.modalForm{
+  display: flex;
+  flex-wrap: wrap;
+  row-gap:25px;
+  column-gap:10px; 
+}
+.modalForm img{
+  flex-basis: 17%;
+  width: 15%;
+  height: 20%;
+  object-fit: cover;
+}
+
+.modalForm .fa-trash-can {
+  position: relative;
+  top: 15px;
 }
 
 .modal--open {
@@ -97,9 +123,8 @@
   transform: rotate(360deg)
 }
 
-.modal-footer {
-  border-style: solid;
-  border-top: 20px;
+.modal-footer div {
+  border-top: 10px solid black;
 }
 
 .modal-footer-button {
@@ -107,10 +132,9 @@
   bottom:15px;
   right:40%;
   font-size: 16px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Work Sans';
   padding: 10px 20px;
   border: none;
-  border-radius: 3px;
   background-color: #1D6154;
   color: white;
   cursor: pointer;
