@@ -2,6 +2,8 @@
 
 let works = [];
 
+const token = localStorage.getItem('token');
+console.log('Token actuel:', token);
 
 async function fetchData() {
   const worksUrl = 'http://localhost:5678/api/works';
@@ -59,11 +61,17 @@ function createCategories(categories) {
   buttonCategoriesTous.setAttribute("data-category-id", 0);
   categoriesGallery.appendChild(buttonCategoriesTous);
 
+  if (token !== null) {
+    categoriesGallery.style.display = 'none';
+  }
   for (let i = 0; i < categories.length; i++) {
     const buttonCat = categories[i];
 
+    console.log(token);
+
     const buttonCategories = document.createElement("button");
     buttonCategories.classList.add("filter-button");
+    
     
     buttonCategories.innerText = buttonCat.name;
     buttonCategories.setAttribute("data-category-id", buttonCat.id);
@@ -79,10 +87,9 @@ function createCategories(categories) {
   divDuneDiv.appendChild(categoriesGallery);
   parentGallery.insertBefore(divDuneDiv, gallery)
   
-  const boutonsFiltre = document.querySelectorAll('.filter-button');
-
   
-
+  const boutonsFiltre = document.querySelectorAll('.filter-button');
+  
   boutonsFiltre.forEach((bouton) => {
     
     bouton.addEventListener('click', () => {
@@ -92,9 +99,9 @@ function createCategories(categories) {
     });
     
   });
-
-  
 }    
+
+
 
 function filtrerParCategorie(categorieId) {
   console.log('Filtrer par catégorie appelé avec ID:', categorieId);
@@ -115,13 +122,17 @@ function createWorks(filteredWorks) {
     modalForm.classList.add("modalForm");
     const divSup = document.createElement("div");
 
+
     (filteredWorks || works).forEach((travail) => {
       const figureGallery = document.createElement("figure");
       const imgGallery = document.createElement("img");
       const imgModal = document.createElement("img");
+      const divModal = document.createElement("div");
+      divModal.classList.add("divModal")
       const modal = document.querySelector('.modal');
-      const trashIcon = document.createElement("i");
-      trashIcon.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+      const trashIcon =  document.createElement("i");
+      trashIcon.classList.add('fa-solid', 'fa-trash');
+      
       
 
       imgGallery.src = travail.imageUrl;
@@ -130,31 +141,25 @@ function createWorks(filteredWorks) {
       figCaptionGallery.innerText = travail.title;
 
 
+
       gallery.appendChild(figureGallery);
       figureGallery.appendChild(imgGallery);
       figureGallery.appendChild(figCaptionGallery);
       
-
-      imgModal.appendChild(trashIcon);
-      modalForm.appendChild(imgModal);
+      
+      divModal.appendChild(imgModal);
+      modalForm.appendChild(trashIcon);
+      modalForm.appendChild(divModal);
       divSup.appendChild(modalForm);
       modal.appendChild(divSup);
     });
   }
 
-  const token = localStorage.getItem('token');
-  console.log('Token actuel:', token);
-
-
-
-  if (token) {
+  
+  if (token !== null) {
+    console.log("display: none;");
     document.querySelector('.flex-align button').style.display = 'block';
     document.querySelector('.mode-edition').style.display ='block';
     const login = document.querySelector('#loginButton');
-    login.innerText = "Logout"
-    console.log(login);
-  } else {
-    document.querySelector('.filter-button').style.display ='none'
-  };
-
-  
+    login.innerText = "Logout";
+  } 

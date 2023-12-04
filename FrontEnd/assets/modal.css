@@ -61,9 +61,8 @@
   position: fixed;
   top: 25%;
   left: 25%;
-  transform: translate(-50%, - 50%);
-  width: 50%;
-  height: 60%;
+  width: 40%;
+  height: 65%;
   background-color: white;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 10px;
@@ -77,23 +76,41 @@
   width: 100%;
 }
 
-.modalForm{
+.modal-title {
+  color: black;
+  font-size: 20px;
+  font-weight: 500;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-family: 'Work Sans' ;
+}
+
+.modalForm {
   display: flex;
-  flex-wrap: wrap;
   row-gap:25px;
   column-gap:10px; 
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
 }
-.modalForm img{
+
+
+
+.divModal img{
   flex-basis: 17%;
-  width: 15%;
-  height: 20%;
+  height: 100px;
+  length: 50px;
   object-fit: cover;
 }
 
-.modalForm .fa-trash-can {
-  position: relative;
-  top: 15px;
+.fa-trash-can {
+  position: absolute;
+  cursor: pointer;
+  /* Ajoutez d'autres styles au besoin */
 }
+
+
+
 
 .modal--open {
   display: block;
@@ -123,20 +140,24 @@
   transform: rotate(360deg)
 }
 
-.modal-footer div {
-  border-top: 10px solid black;
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px; /* Espacement entre la ligne séparatrice et le bouton */
+  text-align: center; /* Centrer le bouton */
 }
+
 
 .modal-footer-button {
   position: absolute;
-  bottom:15px;
-  right:40%;
-  font-size: 16px;
+  bottom: 25px;
+  font-size: 14px;
   font-family: 'Work Sans';
-  padding: 10px 20px;
+  padding: 10px 55px;
   border: none;
   background-color: #1D6154;
   color: white;
   cursor: pointer;
   border-radius: 20px;
+  
 }
