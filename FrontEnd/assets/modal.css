@@ -95,18 +95,27 @@
 }
 
 
+.divModal {
+  position: relative;
+  display: inline-flex;
+}
 
 .divModal img{
   flex-basis: 17%;
-  height: 100px;
-  length: 50px;
+  width: 65px;
   object-fit: cover;
 }
 
-.fa-trash-can {
+.divModal .fa-trash-can {
   position: absolute;
+  right:5px;
+  top: 5px;
+  color: white;
+  background-color: black;
+  padding:3px;
+  font-size: 10px;
   cursor: pointer;
-  /* Ajoutez d'autres styles au besoin */
+  
 }
 
 

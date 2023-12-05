@@ -131,7 +131,7 @@ function createWorks(filteredWorks) {
       divModal.classList.add("divModal")
       const modal = document.querySelector('.modal');
       const trashIcon =  document.createElement("i");
-      trashIcon.classList.add('fa-solid', 'fa-trash');
+      trashIcon.classList.add('fa-solid', 'fa-trash-can');
       
       
 
@@ -148,7 +148,7 @@ function createWorks(filteredWorks) {
       
       
       divModal.appendChild(imgModal);
-      modalForm.appendChild(trashIcon);
+      divModal.appendChild(trashIcon);
       modalForm.appendChild(divModal);
       divSup.appendChild(modalForm);
       modal.appendChild(divSup);
