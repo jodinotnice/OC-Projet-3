@@ -6,6 +6,7 @@ function openModal() {
 function closeModal() {
   document.querySelector('.overlay').style.display = 'none';
   document.querySelector('.modal').classList.remove('modal--open');
+  document.querySelector('.modal-two').classList.remove('modal--open');
 }
 
 document.querySelector('.overlay').addEventListener('click', function (event) {
@@ -13,6 +14,11 @@ document.querySelector('.overlay').addEventListener('click', function (event) {
     closeModal();
   }
 });
+
+function openModalTwo() {
+  document.querySelector('.modal-two').classList.add('modal--open');
+}
+
 
 const token = localStorage.getItem('token');
 

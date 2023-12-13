@@ -79,9 +79,59 @@
 					</div>
 
 					<div class="modal-footer">
-						<button class="modal-footer-button">Ajouter une photo</button>
+						<hr>
+						<button onclick="openModalTwo()" class="modal-footer-button">
+							Ajouter une photo
+						</button>
 					</div>
 				</div>
+			</div>
+			<div class="modal-two">
+
+				<h2 class="modal-title">
+					Ajout photo
+				</h2>
+
+				<form class="js-submit" id="myForm">
+					
+					<div>
+						<i class="fa-regular fa-image"></i>
+						<label for="photo">
+							+ Ajouter photo
+						</label>
+						<input type="file" class="js-photo" id="inpFile">
+					</div>
+				
+					
+					<div>
+						<label for="titre">Titre</label>
+						<input type="text" name="titre" id="inputTitle" class="js-title">
+					</div>
+					
+					<div>
+						<label for="categorie">Catégorie</label>
+						<select name="categorie" class="js-category" id="selectCategories">
+							<option></option>
+							<option value="1">Objets</option>
+							<option value="2">Appartements</option>
+							<option value="3">Hôtels & restaurants</option>
+						</select>
+					</div>
+			
+
+				<div class="modal-close">
+					<button onclick="closeModal()">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+						</svg>
+					</button>
+				</div>
+
+				<input type="submit" value="valider le projet"
+				class="modal-footer-button-two" id="submitButton">
+					
+				</input>
+			</form>
 			</div>
 		<div class="gallery">
 			

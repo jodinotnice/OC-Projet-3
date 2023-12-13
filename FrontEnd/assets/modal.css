@@ -72,6 +72,21 @@
   display: none;
 }
 
+.modal-two {
+  position: fixed;
+  top: 25%;
+  left: 25%;
+  width: 40%;
+  height: 65%;
+  background-color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 10px;
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-top: 40px;
+  display: none;
+}
+
 .divSup {
   width: 100%;
 }
@@ -115,7 +130,7 @@
   padding:3px;
   font-size: 10px;
   cursor: pointer;
-  
+  border: none;
 }
 
 
@@ -157,6 +172,7 @@
 }
 
 
+
 .modal-footer-button {
   position: absolute;
   bottom: 25px;
@@ -168,5 +184,19 @@
   color: white;
   cursor: pointer;
   border-radius: 20px;
-  
+}
+
+input[type="submit"].modal-footer-button-two {
+  position: absolute;
+  bottom: 25px;
+  right: 35%;
+  font-size: 14px;
+  font-family: 'Work Sans';
+  font-weight: 500;
+  padding: 10px 35px;
+  border: none;
+  background-color: grey;
+  color: white;
+  cursor: pointer;
+  border-radius: 20px;
 }
