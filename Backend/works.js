@@ -4,6 +4,8 @@ let works = [];
 
 const token = localStorage.getItem('token');
 
+
+
 async function fetchData() {
   const worksUrl = 'http://localhost:5678/api/works';
 
@@ -28,15 +30,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   await fetchData();
   getCategories();
 
-  const submitButton = document.getElementById("submitButton");
+  const form = document.getElementById("myForm");
   const photoInput = document.getElementById("inpFile");
   const titleInput = document.getElementById("inputTitle");
   const selectCategories = document.getElementById("selectCategories");
   
 
   
-  submitButton.addEventListener('click', async (e) => {
-    e.preventDefault();
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
 
     const endPoint = "http://localhost:5678/api/works";
     const formData = new FormData();
@@ -68,6 +71,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) {
       console.error('Erreur lors de la requête:', error);
     }
+    console.log(selectCategories.value)
   });
   
 });
@@ -106,6 +110,9 @@ function createCategories(categories) {
   if (token !== null) {
     categoriesGallery.style.display = 'none';
   }
+
+  
+
   for (let i = 0; i < categories.length; i++) {
     const buttonCat = categories[i];
 
@@ -137,9 +144,16 @@ function createCategories(categories) {
       const categorieIdFiltre = parseInt(bouton.getAttribute('data-category-id'), 10);
       
       filtrerParCategorie(categorieIdFiltre);
+
+      boutonsFiltre.forEach((btn) => {
+        btn.classList.remove('active');
+      });
+      bouton.classList.add('active');
     });
     
   });
+
+  buttonCategoriesTous.click();
 }    
 
 
@@ -150,21 +164,33 @@ function filtrerParCategorie(categorieId) {
     return categorieId === 0 || travail.categoryId === categorieId;
   });
   
+  console.log(travauxFiltres);
   createWorks(travauxFiltres);
+
 
 }
 
 
 function createWorks(filteredWorks) {
   const gallery = document.querySelector('.gallery');
+  const modal = document.querySelector('.modal');
   
+  gallery.innerHTML = '';
+  
+  Array.from(modal.children).forEach((child) => {
+    if (!child.classList.contains('modal-header')) {
+      child.remove();
+    }
+  });
 
     const modalForm = document.createElement("div");
     modalForm.classList.add("modalForm");
     const divSup = document.createElement("div");
 
 
-    (filteredWorks || works).forEach((travail) => {
+    
+
+    (filteredWorks).forEach((travail) => {
       const figureGallery = document.createElement("figure");
       const imgGallery = document.createElement("img");
       const imgModal = document.createElement("img");
@@ -194,6 +220,8 @@ function createWorks(filteredWorks) {
      trashIcon.addEventListener('click', event => {
       event.preventDefault();
       
+      suppressionEnCours = true;
+
       fetch(`http://localhost:5678/api/works/${travail.id}`,{
         method: 'DELETE',
         headers: {'Content-Type': 'application/json',
@@ -206,10 +234,11 @@ function createWorks(filteredWorks) {
       })
       .then ((data) => {
         console.log(data);
-        console.log(response.status)
+        console.log(response.status);
+        suppressionEnCours = false;
       })
       .catch (() => {
-
+        suppressionEnCours = false;
       })
 
      })
@@ -217,11 +246,19 @@ function createWorks(filteredWorks) {
 
   }
 
-  
+  const logoutButton = document.getElementById("loginButton");
+
   if (token !== null) {
     document.querySelector('.flex-align button').style.display = 'block';
     document.querySelector('.mode-edition').style.display ='block';
     const login = document.querySelector('#loginButton');
     login.innerText = "Logout";
+    logoutButton.addEventListener('click', () => {
+        localStorage.removeItem("token");
+        window.location.reload();
+    });
   } 
+
+
+  
 

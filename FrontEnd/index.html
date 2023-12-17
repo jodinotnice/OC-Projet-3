@@ -32,7 +32,7 @@
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li id="loginButton" onclick="toggleLogin()"><a href="./login.html">Login</a></li>
+			<li id="loginButton"><a href="./login.html">Login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -94,21 +94,22 @@
 
 				<form class="js-submit" id="myForm">
 					
-					<div>
+					<div class="formPhoto">
 						<i class="fa-regular fa-image"></i>
-						<label for="photo">
+						<button class="buttonAddPhoto" 
+						onclick="document.getElementById('inpFile').click()">
 							+ Ajouter photo
-						</label>
+						</button>
 						<input type="file" class="js-photo" id="inpFile">
 					</div>
 				
 					
-					<div>
+					<div class="formTitle">
 						<label for="titre">Titre</label>
 						<input type="text" name="titre" id="inputTitle" class="js-title">
 					</div>
 					
-					<div>
+					<div class="formCategories">
 						<label for="categorie">Catégorie</label>
 						<select name="categorie" class="js-category" id="selectCategories">
 							<option></option>
@@ -131,6 +132,7 @@
 				class="modal-footer-button-two" id="submitButton">
 					
 				</input>
+				<hr>
 			</form>
 			</div>
 		<div class="gallery">

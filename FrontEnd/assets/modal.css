@@ -200,3 +200,76 @@ input[type="submit"].modal-footer-button-two {
   cursor: pointer;
   border-radius: 20px;
 }
+
+
+.formPhoto{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(227, 246, 252);
+  height: 150px
+}
+
+.fa-image{
+  color: grey;
+transform: scale(4.5);
+margin-bottom: 33px;
+margin-top: 15px;
+}
+
+.buttonAddPhoto{
+  border: none;
+  color: rgb(0, 115, 255);
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-left: 35px;
+  padding-right: 35px;
+  border-radius: 25px;
+  background-color: rgb(199, 199, 199);
+}
+
+.js-photo{
+  display: none;
+}
+
+
+.formTitle label{
+  font-weight: bold;
+}
+
+.formTitle{
+display: flex;
+flex-direction: column;
+margin-top: 30px;
+
+}
+
+.js-title{
+border: none;
+box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+padding: 10px;
+
+}
+
+.formCategories label {
+  font-weight: bold;
+  
+}
+
+.formCategories{
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  
+}
+
+.js-category{
+  border: none;
+  box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+  padding: 10px;
+}
+
+.js-submit hr{
+  margin-top: 100px;
+}
