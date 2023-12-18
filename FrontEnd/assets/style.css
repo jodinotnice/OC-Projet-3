@@ -136,6 +136,16 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
+a:visited, a:link {
+  color: initial;
+  text-decoration: none;
+}
+
+a:hover{
+	color: #B1663C;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;

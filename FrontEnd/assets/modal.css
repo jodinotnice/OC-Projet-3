@@ -133,7 +133,10 @@
   border: none;
 }
 
-
+#selectedImage {
+  width: 100px;
+  
+}
 
 
 .modal--open {

@@ -34,8 +34,35 @@ document.addEventListener('DOMContentLoaded', async () => {
   const photoInput = document.getElementById("inpFile");
   const titleInput = document.getElementById("inputTitle");
   const selectCategories = document.getElementById("selectCategories");
-  
+  const submitButton = document.getElementById('submitButton');
+  const selectedImage = document.getElementById("selectedImage");
+  const icon = document.querySelector('.fa-image');
 
+  photoInput.addEventListener('input', updateButtonColor);
+  titleInput.addEventListener('input', updateButtonColor);
+  selectCategories.addEventListener('change', updateButtonColor);
+
+  photoInput.addEventListener('change', () => {
+    // Mettez à jour l'attribut 'src' de l'image avec l'URL de l'image sélectionnée
+    if (photoInput.files && photoInput.files[0]) {
+      const reader = new FileReader();
+      icon.style.display = "none";
+      document.querySelector('.buttonAddPhoto').style.display = "none";
+      reader.onload = function (e) {
+        selectedImage.src = e.target.result;
+      };
+
+      reader.readAsDataURL(photoInput.files[0]);
+    }
+  });
+  function updateButtonColor() {
+    
+    if (photoInput.files[0] && titleInput.value && selectCategories.value) {
+      submitButton.style.backgroundColor = '#1D6154'; 
+    } else {
+      submitBtn.style.backgroundColor = '';
+    }
+  }
   
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -59,10 +86,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         },
       });
 
+      
+
       if (response.ok) {
         console.log('Photo envoyée avec succès');
 
-        
         await fetchData();
         createWorks(works);
       } else {
