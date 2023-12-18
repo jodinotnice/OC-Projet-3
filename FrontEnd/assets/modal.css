@@ -60,9 +60,9 @@
 .modal {
   position: fixed;
   top: 25%;
-  left: 25%;
-  width: 40%;
-  height: 65%;
+  left: 40%;
+  width: 20%;
+  height: 55%;
   background-color: white;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 10px;
@@ -75,9 +75,9 @@
 .modal-two {
   position: fixed;
   top: 25%;
-  left: 25%;
-  width: 40%;
-  height: 65%;
+  left: 40%;
+  width: 20%;
+  height: 55%;
   background-color: white;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 10px;

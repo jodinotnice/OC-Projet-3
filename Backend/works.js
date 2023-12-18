@@ -178,7 +178,7 @@ function createWorks(filteredWorks) {
   gallery.innerHTML = '';
   
   Array.from(modal.children).forEach((child) => {
-    if (!child.classList.contains('modal-header')) {
+    if (!child.classList.contains('modal-close') && !child.classList.contains('modal-header') ) {
       child.remove();
     }
   });
@@ -220,7 +220,7 @@ function createWorks(filteredWorks) {
      trashIcon.addEventListener('click', event => {
       event.preventDefault();
       
-      suppressionEnCours = true;
+      
 
       fetch(`http://localhost:5678/api/works/${travail.id}`,{
         method: 'DELETE',
