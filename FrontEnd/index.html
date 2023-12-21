@@ -63,6 +63,7 @@
 
 			<div class="overlay"></div>
 			<div class="modal">
+				
 				<div class="modal-close">
 					<button onclick="closeModal()">
 						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -78,8 +79,9 @@
 
 					</div>
 
+					<hr>
 					<div class="modal-footer">
-						<hr>
+						
 						<button onclick="openModalTwo()" class="modal-footer-button">
 							Ajouter une photo
 						</button>
@@ -87,7 +89,11 @@
 				</div>
 			</div>
 			<div class="modal-two">
-
+				<div class="modal-return">
+					<button onclick="returnModal()">
+						<i class="fa-solid fa-arrow-left"></i>
+					</button>
+				</div>
 				<h2 class="modal-title">
 					Ajout photo
 				</h2>
@@ -128,13 +134,13 @@
 						</svg>
 					</button>
 				</div>
-
+				<hr>
 				<input type="submit" value="valider le projet"
 				class="modal-footer-button-two" id="submitButton">
-					
 				</input>
-				<hr>
+				
 			</form>
+			
 			</div>
 		<div class="gallery">
 			

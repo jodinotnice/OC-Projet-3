@@ -1,5 +1,3 @@
-
-
 let works = [];
 
 const token = localStorage.getItem('token');
@@ -37,13 +35,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   const submitButton = document.getElementById('submitButton');
   const selectedImage = document.getElementById("selectedImage");
   const icon = document.querySelector('.fa-image');
+  const modalTwo = document.querySelector('.modal-two');
+  const erreurText = document.createElement("p");
+  erreurText.classList.add("error-message");
 
   photoInput.addEventListener('input', updateButtonColor);
   titleInput.addEventListener('input', updateButtonColor);
   selectCategories.addEventListener('change', updateButtonColor);
 
   photoInput.addEventListener('change', () => {
-    // Mettez à jour l'attribut 'src' de l'image avec l'URL de l'image sélectionnée
+    
     if (photoInput.files && photoInput.files[0]) {
       const reader = new FileReader();
       icon.style.display = "none";
@@ -95,6 +96,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         createWorks(works);
       } else {
         console.error('Échec de l\'envoi de la photo');
+
+        
+    
+    
+        erreurText.innerText = "Champs incomplets";
+    
+        modalTwo.appendChild(erreurText);
       }
     } catch (error) {
       console.error('Erreur lors de la requête:', error);
@@ -204,6 +212,10 @@ function createWorks(filteredWorks) {
   const modal = document.querySelector('.modal');
   
   gallery.innerHTML = '';
+
+  const modalBody = document.querySelector('.modal-body');
+
+  modalBody.innerHTML = '';
   
   Array.from(modal.children).forEach((child) => {
     if (!child.classList.contains('modal-close') && !child.classList.contains('modal-header') ) {
@@ -213,11 +225,8 @@ function createWorks(filteredWorks) {
 
     const modalForm = document.createElement("div");
     modalForm.classList.add("modalForm");
-    const divSup = document.createElement("div");
-
-
+  
     
-
     (filteredWorks).forEach((travail) => {
       const figureGallery = document.createElement("figure");
       const imgGallery = document.createElement("img");
@@ -234,16 +243,15 @@ function createWorks(filteredWorks) {
       imgModal.src = travail.imageUrl
       const figCaptionGallery = document.createElement("figcaption");
       figCaptionGallery.innerText = travail.title;
-
+      
       gallery.appendChild(figureGallery);
       figureGallery.appendChild(imgGallery);
       figureGallery.appendChild(figCaptionGallery);
       
       divModal.appendChild(imgModal);
       divModal.appendChild(trashIcon);
-      modalForm.appendChild(divModal);
-      divSup.appendChild(modalForm);
-      modal.appendChild(divSup);
+      modalBody.appendChild(divModal);
+      
 
      trashIcon.addEventListener('click', event => {
       event.preventDefault();
@@ -263,15 +271,15 @@ function createWorks(filteredWorks) {
       .then ((data) => {
         console.log(data);
         console.log(response.status);
-        suppressionEnCours = false;
+        
       })
       .catch (() => {
-        suppressionEnCours = false;
+        
       })
 
      })
     });
-
+    
   }
 
   const logoutButton = document.getElementById("loginButton");

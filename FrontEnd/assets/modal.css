@@ -61,8 +61,8 @@
   position: fixed;
   top: 25%;
   left: 40%;
-  width: 20%;
-  height: 55%;
+  width: 45%;
+  height: 65%;
   background-color: white;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 10px;
@@ -76,8 +76,8 @@
   position: fixed;
   top: 25%;
   left: 40%;
-  width: 20%;
-  height: 55%;
+  width: 45%;
+  height: 65%;
   background-color: white;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 10px;
@@ -87,8 +87,14 @@
   display: none;
 }
 
+.error-message{
+	color:red;
+	font-weight: bold;
+	text-align: center;
+}
+
 .divSup {
-  width: 100%;
+  width: 300px;
 }
 
 .modal-title {
@@ -100,24 +106,33 @@
   font-family: 'Work Sans' ;
 }
 
-.modalForm {
+.modal-body {
   display: flex;
+  width: 265px;
   row-gap:25px;
   column-gap:10px; 
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
+  max-height: 100%; /* Ajoutez cette ligne */
+  overflow-y: auto; /* Ajoutez cette ligne */
 }
 
 
 .divModal {
   position: relative;
   display: inline-flex;
+  max-width: 100%;
+  max-height: 100%; 
+  width: 16%; /* Ajoutez cette ligne */
+  overflow: hidden; /* Ajoutez cette ligne */
 }
 
 .divModal img{
-  flex-basis: 17%;
-  width: 65px;
+  flex-basis: 20%;
+  width: 45px;
+  max-width: 100%;
+  max-height: 100%; 
   object-fit: cover;
 }
 
@@ -141,15 +156,38 @@
 
 .modal--open {
   display: block;
+  width: 265px;
+}
+
+.modal--open-two {
+  display: block;
+  width: 265px;
+}
+
+.modal-return {
+  position: absolute;
+  top: 15px;
+  left: 8px;
+  cursor: pointer;
+}
+
+.modal-return button {
+  background-color: transparent;
+  color: black;
+  border: none;
+}
+
+.fa-arrow-left {
+  width: 30px;
+  height: 30px;
 }
 
 .modal-close {
   position: absolute;
-  top: 8px;
+  top: 15px;
   right: 8px;
   cursor: pointer;
   transition: 0.3s all ease-in-out;
-  cursor: pointer;
 }
 
 .modal-close button {
@@ -159,8 +197,8 @@
 }
 
 .modal-close svg {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
 }
 
 .modal-close:hover {
@@ -190,9 +228,9 @@
 }
 
 input[type="submit"].modal-footer-button-two {
-  position: absolute;
-  bottom: 25px;
-  right: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 14px;
   font-family: 'Work Sans';
   font-weight: 500;
@@ -222,6 +260,7 @@ margin-top: 15px;
 }
 
 .buttonAddPhoto{
+  z-index: 1; 
   border: none;
   color: rgb(0, 115, 255);
   padding-top: 9px;
@@ -273,6 +312,9 @@ padding: 10px;
   padding: 10px;
 }
 
+.modal hr {
+  margin-top: 50px;
+}
 .js-submit hr{
-  margin-top: 100px;
+  margin-top: 50px;
 }

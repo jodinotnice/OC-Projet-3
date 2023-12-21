@@ -6,7 +6,7 @@ function openModal() {
 function closeModal() {
   document.querySelector('.overlay').style.display = 'none';
   document.querySelector('.modal').classList.remove('modal--open');
-  document.querySelector('.modal-two').classList.remove('modal--open');
+  document.querySelector('.modal-two').classList.remove('modal--open-two');
 }
 
 document.querySelector('.overlay').addEventListener('click', function (event) {
@@ -15,8 +15,15 @@ document.querySelector('.overlay').addEventListener('click', function (event) {
   }
 });
 
+
+
 function openModalTwo() {
-  document.querySelector('.modal-two').classList.add('modal--open');
+  document.querySelector('.overlay').style.display = 'block';
+  document.querySelector('.modal-two').classList.add('modal--open-two');
+}
+
+function returnModal() {
+  document.querySelector('.modal-two').classList.remove('modal--open-two');
 }
 
 
