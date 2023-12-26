@@ -1,8 +1,9 @@
+// Tableau pour stocker les travaux récupérés
 let works = [];
 
 const token = localStorage.getItem('token');
 
-
+// Fonction pour récupérer les données depuis l'API
 async function fetchData() {
   const worksUrl = 'http://localhost:5678/api/works';
 
@@ -14,7 +15,8 @@ async function fetchData() {
     }
 
     works = await response.json();
-    
+
+     // Création des travaux après récupération des données
     createWorks(works);
 
   } catch (error) {
@@ -23,6 +25,7 @@ async function fetchData() {
 }
 
 
+// Exécute la fonction fetchData après le chargement du DOM
 document.addEventListener('DOMContentLoaded', async () => {
   console.log('LOADED?')
   await fetchData();
@@ -38,6 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const erreurText = document.createElement("p");
   erreurText.classList.add("error-message");
 
+   // Écouteurs d'événements pour les champs du formulaire
   photoInput.addEventListener('input', () => {
     updateButtonColor();
     updatePreview()
@@ -54,13 +58,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  function resetModalInputs() {
-    titleInput.value = '';
-    selectCategories.value = '';
-    submitButton.style.backgroundColor = '';
-  }
-
-    function updatePreview() {
+  function updatePreview() {
 
       const buttonAdd = document.querySelector('.buttonAddPhoto');
       const paraPhoto = document.querySelector('.p-photo');
@@ -72,7 +70,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     }
 
-    function addInput() {
+  function addInput() {
       const buttonAdd = document.querySelector('.buttonAddPhoto');
       const paraPhoto = document.querySelector('.p-photo');
 
@@ -81,15 +79,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       icon.style.display = 'block';
     }
 
-    function updateButtonColor() {
+  function updateButtonColor() {
       const photoInput = document.getElementById("inpFile");
       const buttonAdd = document.querySelector('.buttonAddPhoto');
       const paraPhoto = document.querySelector('.p-photo');
       const icon = document.querySelector('.fa-image');
 
-      buttonAdd.style.display = 'none';
-      paraPhoto.style.display = 'none';
-      icon.style.display = 'none';
+      
 
     if (photoInput.files[0] && titleInput.value && selectCategories.value) {
       submitButton.style.backgroundColor = '#1D6154'; 
@@ -105,9 +101,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     submitButton.style.backgroundColor = '';
   }
   
+
+   // Écouteur d'événement pour le formulaire
   form.addEventListener('submit',  (event) => {
     event.preventDefault();
 
+    // Vérifie si la modal est ouverte avant d'envoyer la requête
     if (document.querySelector('.modal-two').classList.contains('modal--open-two')) {
       
       const endPoint = "http://localhost:5678/api/works";
@@ -129,23 +128,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (response.ok) {
           console.log('Photo envoyée avec succès');
 
-          
+          // Réinitialisation des champs du formulaire et mise à jour de l'affichage
           removePreviewImage();
           resetModalInputs();
           addInput();
 
           window.alert("Photo ajoutée à la galerie !");
 
+          // Recharge les travaux depuis l'API
           return fetchData();
-          //  createWorks(works);
+          
         } else {
           console.error('Échec de l\'envoi de la photo');
 
 
           window.alert("Veuillez renseigner tous les champs.")
-          /*erreurText.innerText = "Champs incomplets";
-      
-          modalTwo.appendChild(erreurText);*/
+          
         }
 
       }).catch((error) => {
@@ -158,7 +156,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-
+// Fonction pour récupérer les catégories depuis l'API
 async function getCategories() {
   const categoriesUrl = 'http://localhost:5678/api/categories';
 
@@ -178,7 +176,7 @@ async function getCategories() {
 }
 
 
-
+// Fonction pour créer les boutons de filtre par catégorie
 function createCategories(categories) {
   const categoriesGallery = document.createElement("div");
   categoriesGallery.classList.add("container");
@@ -193,8 +191,6 @@ function createCategories(categories) {
   if (token !== null) {
     categoriesGallery.style.display = 'none';
   }
-
-  
 
   for (let i = 0; i < categories.length; i++) {
     const buttonCat = categories[i];
@@ -240,7 +236,7 @@ function createCategories(categories) {
 }    
 
 
-
+// Fonction pour filtrer les travaux par catégorie
 function filtrerParCategorie(categorieId) {
   console.log('Filtrer par catégorie appelé avec ID:', categorieId);
   const travauxFiltres = works.filter((travail) => {
@@ -253,7 +249,7 @@ function filtrerParCategorie(categorieId) {
 
 }
 
-
+// Fonction pour créer les travaux dans la galerie
 function createWorks(filteredWorks) {
   const gallery = document.querySelector('.gallery');
   const modal = document.querySelector('.modal');
@@ -312,6 +308,7 @@ function createWorks(filteredWorks) {
         },
       })
       .then(() => {
+        window.alert("Photo supprimée de galerie !");
         return fetchData();
       })
 
@@ -334,6 +331,14 @@ function createWorks(filteredWorks) {
     });
   }
 
+  const flexAlign = document.querySelector('.flex-align');
+
+  if (token) {
+    flexAlign.classList.add('extra-space');
+  } else {
+      flexAlign.classList.remove('extra-space');
+  }
+
   const input = document.querySelector('#inpFile')
   if (input != null) {
     input.addEventListener('change', (event) => {
@@ -353,5 +358,6 @@ function createWorks(filteredWorks) {
   }
 
 
+  
   
 

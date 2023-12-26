@@ -42,6 +42,9 @@ formLog.addEventListener('submit', event => {
     .catch(error => console.error("Erreur lors de la requête:", error));
 });
 
+const portfolioSection = document.querySelector('#portfolio');
+
+
 const token = localStorage.getItem('token');
 
 console.log('Token actuel:', token);

@@ -343,4 +343,6 @@ padding: 10px;
   display: none;
 }
 
-
+.extra-space {
+  margin-bottom: 60px;
+}
