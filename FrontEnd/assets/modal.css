@@ -51,8 +51,8 @@
   position: fixed;
   top:0;
   left: 0;
-  width: 100vw;
-  height: 100vw;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0 , 0, 0.5);
   display: none;
 }
@@ -60,9 +60,11 @@
 .modal {
   position: fixed;
   top: 25%;
-  left: 40%;
-  width: 45%;
-  height: 65%;
+  left: 37%;
+  width: 50%;
+  height: 60%;
+  min-height: 35px;
+  max-height: 500px;
   background-color: white;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 10px;
@@ -75,9 +77,10 @@
 .modal-two {
   position: fixed;
   top: 25%;
-  left: 40%;
-  width: 45%;
-  height: 65%;
+  left: 37%;
+  width: 50%;
+  height: 60%;
+  max-height: 500px;
   background-color: white;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 10px;
@@ -87,14 +90,15 @@
   display: none;
 }
 
+
 .error-message{
 	color:red;
 	font-weight: bold;
 	text-align: center;
 }
 
-.divSup {
-  width: 300px;
+.modal-header {
+  height: 50px;
 }
 
 .modal-title {
@@ -102,20 +106,24 @@
   font-size: 20px;
   font-weight: 500;
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   font-family: 'Work Sans' ;
 }
 
 .modal-body {
   display: flex;
-  width: 265px;
-  row-gap:25px;
-  column-gap:10px; 
+  width: 350px;
+  row-gap:20px;
+  column-gap: 7px;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
-  max-height: 100%; /* Ajoutez cette ligne */
-  overflow-y: auto; /* Ajoutez cette ligne */
+}
+
+.js-modal-body {
+  max-height: 325px;
+  width:400px;
+  overflow-y: auto;
 }
 
 
@@ -130,7 +138,6 @@
 
 .divModal img{
   flex-basis: 20%;
-  width: 45px;
   max-width: 100%;
   max-height: 100%; 
   object-fit: cover;
@@ -148,20 +155,19 @@
   border: none;
 }
 
+
 #selectedImage {
   width: 100px;
-  
 }
-
 
 .modal--open {
   display: block;
-  width: 265px;
+  width: 350px;
 }
 
 .modal--open-two {
   display: block;
-  width: 265px;
+  width: 350px;
 }
 
 .modal-return {
@@ -208,7 +214,7 @@
 .modal-footer {
   display: flex;
   justify-content: center;
-  margin-top: 10px; /* Espacement entre la ligne séparatrice et le bouton */
+  /* Espacement entre la ligne séparatrice et le bouton */
   text-align: center; /* Centrer le bouton */
 }
 
@@ -217,9 +223,13 @@
 .modal-footer-button {
   position: absolute;
   bottom: 25px;
+  right: 150px;
   font-size: 14px;
   font-family: 'Work Sans';
-  padding: 10px 55px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 35px;
+  padding-right: 35px;
   border: none;
   background-color: #1D6154;
   color: white;
@@ -228,9 +238,9 @@
 }
 
 input[type="submit"].modal-footer-button-two {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute;
+  bottom: -5px;
+  right: 160px;
   font-size: 14px;
   font-family: 'Work Sans';
   font-weight: 500;
@@ -240,6 +250,7 @@ input[type="submit"].modal-footer-button-two {
   color: white;
   cursor: pointer;
   border-radius: 20px;
+  margin-top: 20px;
 }
 
 
@@ -252,8 +263,12 @@ input[type="submit"].modal-footer-button-two {
   height: 150px
 }
 
+.formPhoto p {
+  margin-top: 10px;
+  font-size: 10px;
+}
 .fa-image{
-  color: grey;
+color: grey;
 transform: scale(4.5);
 margin-bottom: 33px;
 margin-top: 15px;
@@ -262,7 +277,7 @@ margin-top: 15px;
 .buttonAddPhoto{
   z-index: 1; 
   border: none;
-  color: rgb(0, 115, 255);
+  color: #306685;
   padding-top: 9px;
   padding-bottom: 9px;
   padding-left: 35px;
@@ -275,16 +290,15 @@ margin-top: 15px;
   display: none;
 }
 
-
-.formTitle label{
-  font-weight: bold;
-}
-
 .formTitle{
 display: flex;
 flex-direction: column;
 margin-top: 30px;
+}
 
+.formTitle label{
+  font-weight: bold;
+  margin-bottom: 7px;
 }
 
 .js-title{
@@ -294,16 +308,16 @@ padding: 10px;
 
 }
 
-.formCategories label {
-  font-weight: bold;
-  
-}
-
 .formCategories{
   display: flex;
   flex-direction: column;
   margin-top: 15px;
-  
+  margin-bottom: 20px;
+}
+
+.formCategories label {
+  font-weight: bold;
+  margin-bottom: 7px;
 }
 
 .js-category{
@@ -312,9 +326,21 @@ padding: 10px;
   padding: 10px;
 }
 
-.modal hr {
-  margin-top: 50px;
+.container-hr {
+  position: absolute;
+  bottom: 85px; /* Ajustez la position selon vos besoins */
+  left: 65px; /* Ajustez la position selon vos besoins */
+  right: 65px; /* Ajustez la position selon vos besoins */
 }
-.js-submit hr{
-  margin-top: 50px;
+
+.modal-hr {
+  margin: 0;
 }
+
+.modal-two.has-image .p-photo,
+.modal-two.has-image .buttonAddPhoto,
+.modal-two.has-image .fa-image {
+  display: none;
+}
+
+

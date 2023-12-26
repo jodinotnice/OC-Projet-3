@@ -3,7 +3,6 @@ let works = [];
 const token = localStorage.getItem('token');
 
 
-
 async function fetchData() {
   const worksUrl = 'http://localhost:5678/api/works';
 
@@ -25,6 +24,7 @@ async function fetchData() {
 
 
 document.addEventListener('DOMContentLoaded', async () => {
+  console.log('LOADED?')
   await fetchData();
   getCategories();
 
@@ -33,43 +33,84 @@ document.addEventListener('DOMContentLoaded', async () => {
   const titleInput = document.getElementById("inputTitle");
   const selectCategories = document.getElementById("selectCategories");
   const submitButton = document.getElementById('submitButton');
-  const selectedImage = document.getElementById("selectedImage");
   const icon = document.querySelector('.fa-image');
   const modalTwo = document.querySelector('.modal-two');
   const erreurText = document.createElement("p");
   erreurText.classList.add("error-message");
 
-  photoInput.addEventListener('input', updateButtonColor);
+  photoInput.addEventListener('input', () => {
+    updateButtonColor();
+    updatePreview()
+    });
+
   titleInput.addEventListener('input', updateButtonColor);
   selectCategories.addEventListener('change', updateButtonColor);
 
-  photoInput.addEventListener('change', () => {
-    
-    if (photoInput.files && photoInput.files[0]) {
-      const reader = new FileReader();
-      icon.style.display = "none";
-      document.querySelector('.buttonAddPhoto').style.display = "none";
-      reader.onload = function (e) {
-        selectedImage.src = e.target.result;
-      };
 
-      reader.readAsDataURL(photoInput.files[0]);
+  function removePreviewImage() {
+
+    if (selectedImage) {
+      selectedImage.parentNode.removeChild(selectedImage);
     }
-  });
-  function updateButtonColor() {
-    
+  }
+
+  function resetModalInputs() {
+    titleInput.value = '';
+    selectCategories.value = '';
+    submitButton.style.backgroundColor = '';
+  }
+
+    function updatePreview() {
+
+      const buttonAdd = document.querySelector('.buttonAddPhoto');
+      const paraPhoto = document.querySelector('.p-photo');
+      
+      if (photoInput.files[0]) {
+      buttonAdd.style.display = 'none';
+      paraPhoto.style.display = 'none';
+      icon.style.display = 'none';
+      }
+    }
+
+    function addInput() {
+      const buttonAdd = document.querySelector('.buttonAddPhoto');
+      const paraPhoto = document.querySelector('.p-photo');
+
+      buttonAdd.style.display = 'block';
+      paraPhoto.style.display = 'block';
+      icon.style.display = 'block';
+    }
+
+    function updateButtonColor() {
+      const photoInput = document.getElementById("inpFile");
+      const buttonAdd = document.querySelector('.buttonAddPhoto');
+      const paraPhoto = document.querySelector('.p-photo');
+      const icon = document.querySelector('.fa-image');
+
+      buttonAdd.style.display = 'none';
+      paraPhoto.style.display = 'none';
+      icon.style.display = 'none';
+
     if (photoInput.files[0] && titleInput.value && selectCategories.value) {
       submitButton.style.backgroundColor = '#1D6154'; 
     } else {
-      submitBtn.style.backgroundColor = '';
+      submitButton.style.backgroundColor = '';
     }
   }
-  
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    event.stopPropagation();
 
-    const endPoint = "http://localhost:5678/api/works";
+  function resetModalInputs() {
+    titleInput.value = '';
+    selectCategories.value = '';
+    photoInput.value = '';  
+    submitButton.style.backgroundColor = '';
+  }
+  
+  form.addEventListener('submit',  (event) => {
+    event.preventDefault();
+
+    if (document.querySelector('.modal-two').classList.contains('modal--open-two')) {
+      
+      const endPoint = "http://localhost:5678/api/works";
     const formData = new FormData();
 
 
@@ -77,40 +118,46 @@ document.addEventListener('DOMContentLoaded', async () => {
     formData.append("title", titleInput.value);
     formData.append("category", selectCategories.value);
 
-    console.log(titleInput);
-    try {
-      const response = await fetch(endPoint, {
+    
+      fetch(endPoint, {
         method: "POST",
         body: formData,
         headers: {
           'Authorization': `Bearer ${token}`,
         },
-      });
+      }).then((response) => {
+        if (response.ok) {
+          console.log('Photo envoyée avec succès');
 
+          
+          removePreviewImage();
+          resetModalInputs();
+          addInput();
+
+          window.alert("Photo ajoutée à la galerie !");
+
+          return fetchData();
+          //  createWorks(works);
+        } else {
+          console.error('Échec de l\'envoi de la photo');
+
+
+          window.alert("Veuillez renseigner tous les champs.")
+          /*erreurText.innerText = "Champs incomplets";
       
+          modalTwo.appendChild(erreurText);*/
+        }
 
-      if (response.ok) {
-        console.log('Photo envoyée avec succès');
-
-        await fetchData();
-        createWorks(works);
-      } else {
-        console.error('Échec de l\'envoi de la photo');
-
-        
-    
-    
-        erreurText.innerText = "Champs incomplets";
-    
-        modalTwo.appendChild(erreurText);
-      }
-    } catch (error) {
-      console.error('Erreur lors de la requête:', error);
+      }).catch((error) => {
+        console.error('Erreur lors de la requête:', error);
+      });
     }
-    console.log(selectCategories.value)
+
   });
   
 });
+
+
 
 async function getCategories() {
   const categoriesUrl = 'http://localhost:5678/api/categories';
@@ -227,7 +274,7 @@ function createWorks(filteredWorks) {
     modalForm.classList.add("modalForm");
   
     
-    (filteredWorks).forEach((travail) => {
+  filteredWorks.forEach((travail) => {
       const figureGallery = document.createElement("figure");
       const imgGallery = document.createElement("img");
       const imgModal = document.createElement("img");
@@ -235,6 +282,7 @@ function createWorks(filteredWorks) {
       divModal.classList.add("divModal")
       const modal = document.querySelector('.modal');
       const trashIcon =  document.createElement("button");
+      trashIcon.type = 'button'
       trashIcon.classList.add('fa-solid', 'fa-trash-can');
       
       
@@ -255,29 +303,20 @@ function createWorks(filteredWorks) {
 
      trashIcon.addEventListener('click', event => {
       event.preventDefault();
+      event.stopPropagation();
       
-      
-
       fetch(`http://localhost:5678/api/works/${travail.id}`,{
         method: 'DELETE',
         headers: {'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
         },
       })
-      .then((resData) => {
-        return resData.json();
-        
-      })
-      .then ((data) => {
-        console.log(data);
-        console.log(response.status);
-        
-      })
-      .catch (() => {
-        
+      .then(() => {
+        return fetchData();
       })
 
-     })
+     });
+     
     });
     
   }
@@ -293,7 +332,25 @@ function createWorks(filteredWorks) {
         localStorage.removeItem("token");
         window.location.reload();
     });
-  } 
+  }
+
+  const input = document.querySelector('#inpFile')
+  if (input != null) {
+    input.addEventListener('change', (event) => {
+      // Get the file selected
+      const file = event.target.files[0]
+      const fileUrl = URL.createObjectURL(file)
+
+      // Create an IMG element in the dom 
+      const imgElement = document.createElement('img')
+      imgElement.src = fileUrl
+      imgElement.id = 'selectedImage'
+
+      // Append the new image tag in the dom
+      const container = document.querySelector('.formPhoto')
+      container.appendChild(imgElement)
+    })
+  }
 
 
   

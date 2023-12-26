@@ -10,8 +10,8 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<link rel="stylesheet" href="./assets/modal.css">
-	<script type="module" src="../Backend/works.js" defer></script>
-	<script defer src="modal.js">
+	<script type="module" src="./assets/script/works.js" defer></script>
+	<script defer src="./assets/script/modal.js">
 	</script>
 	<script src="https://kit.fontawesome.com/3a6464218c.js" crossorigin="anonymous"></script>
 </head>
@@ -75,17 +75,21 @@
 					<h2 class="modal-title">
 						Galerie photo
 					</h2>
-					<div class="modal-body">
+					<div class="modal-body js-modal-body">
 
 					</div>
 
-					<hr>
+					<div class="container-hr">
+						<hr class="modal-hr">
+					</div>
+
 					<div class="modal-footer">
-						
 						<button onclick="openModalTwo()" class="modal-footer-button">
 							Ajouter une photo
 						</button>
+						
 					</div>
+					
 				</div>
 			</div>
 			<div class="modal-two">
@@ -98,16 +102,15 @@
 					Ajout photo
 				</h2>
 
-				<form class="js-submit" id="myForm">
+				<form class="js-submit" id="myForm" target="">
 					
 					<div class="formPhoto">
 						<i class="fa-regular fa-image"></i>
-						<button class="buttonAddPhoto" 
-						onclick="document.getElementById('inpFile').click()">
-							+ Ajouter photo
-						</button>
-						<input type="file" class="js-photo" id="inpFile">
-						<img id="selectedImage" src="">
+						<label class="buttonAddPhoto">
+							+ Ajouter photo	
+							<input type="file" class="js-photo" id="inpFile">
+						</label>
+							<p class="p-photo">jpg, png : 4mo max</p>
 					</div>
 				
 					
@@ -134,8 +137,12 @@
 						</svg>
 					</button>
 				</div>
-				<hr>
-				<input type="submit" value="valider le projet"
+
+				<div class="container-hr">
+					<hr class="modal-hr">
+				</div>
+				
+				<input type="submit" value="valider"
 				class="modal-footer-button-two" id="submitButton">
 				</input>
 				
